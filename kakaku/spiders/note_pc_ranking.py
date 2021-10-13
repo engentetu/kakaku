@@ -20,6 +20,7 @@ class NotePcRankingSpider(scrapy.Spider):
             loader.add_xpath('rank', './/span[@class="rkgBoxNum"]//span[@class="num"]/text()')
             loader.add_xpath('price', './/span[@class="price"]/a/text()')
             loader.add_xpath('name', './/span[@class="rkgBoxNameItem"]/text()')
+            loader.add_xpath('img','.//a[@class="withIcnLimited"]/img/@src')
 
             yield loader.load_item()
 

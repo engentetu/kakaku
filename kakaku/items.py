@@ -13,6 +13,11 @@ def strip_yen(item):
         return item.replace('¥', '')
     return item
 
+def strip_newline(item):
+    if item:
+        return item.replace('/', '')
+    return item
+
 
 def strip_comma(item):
     if item:
@@ -33,10 +38,12 @@ class KakakuItem(scrapy.Item):
         output_processor = TakeFirst()
     )
     price = scrapy.Field(
-        input_processor=MapCompose(strip_yen, strip_comma, convert_int),
+        input_processor=MapCompose(strip_yen, strip_comma,  convert_int),
         output_processor = TakeFirst()
     )
     name = scrapy.Field(
-        input_processor=MapCompose(str.lstrip),
+        input_processor=MapCompose(str.lstrip, strip_newline),
         output_processor = TakeFirst()
     )
+
+    img = scrapy.Field()
